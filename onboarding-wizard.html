@@ -6,12 +6,17 @@
   <title>Shop Onboarding Wizard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+  <!-- Styles -->
   <style>
     body {
       background: #f9f9f9;
       font-family: 'Segoe UI', sans-serif;
       transition: background 0.4s ease, color 0.4s ease;
+      margin: 0;
+      padding: 20px;
     }
+
     .wizard {
       background: #fff;
       padding: 30px;
@@ -21,22 +26,28 @@
       margin: 40px auto;
       transition: background 0.4s ease, color 0.4s ease;
     }
+
     .wizard-step {
       display: none;
       animation: fadeIn 0.4s ease-in-out;
     }
+
     .wizard-step.active {
       display: block;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Step Indicator */
     .step-indicator {
       display: flex;
       justify-content: space-between;
       margin-bottom: 30px;
     }
+
     .step-indicator .step {
       flex: 1;
       text-align: center;
@@ -45,10 +56,13 @@
       font-weight: bold;
       color: gray;
     }
+
     .step-indicator .step.active {
       color: #ff7f32;
       border-color: #ff7f32;
     }
+
+    /* Theme Cards */
     .theme-card {
       border: 2px solid transparent;
       border-radius: 10px;
@@ -56,35 +70,92 @@
       transition: 0.3s;
       text-align: center;
     }
+
     .theme-card:hover {
       border-color: #ff7f32;
       transform: scale(1.05);
     }
+
     .theme-card img {
       border-radius: 10px;
       width: 100%;
       height: 150px;
       object-fit: cover;
     }
+
     .theme-card.active {
       border-color: #007bff;
       box-shadow: 0 0 15px rgba(0,123,255,0.4);
     }
-    .scroll-box {
-      max-height: 250px;
-      overflow-y: auto;
-      border: 1px solid #ddd;
-      padding: 15px;
-      border-radius: 8px;
-      background: #fafafa;
+
+    /* Form Elements */
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
     }
+
+    textarea {
+      height: 80px;
+      resize: none;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    /* Custom Checkbox */
+    .custom-checkbox {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .custom-checkbox input {
+      display: none;
+    }
+
+    .checkmark {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #666;
+      margin-right: 10px;
+      display: inline-block;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .custom-checkbox input:checked + .checkmark {
+      background-color: #4CAF50;
+      border-color: #4CAF50;
+    }
+
+    .custom-checkbox input:checked + .checkmark::after {
+      content: "✔";
+      position: absolute;
+      color: white;
+      font-size: 14px;
+      top: -2px;
+      left: 2px;
+    }
+
+    /* Buttons */
     .btn-primary {
       background-color: #ff7f32;
       border: none;
     }
+
     .btn-primary:hover {
       background-color: #e96e25;
     }
+
     .apply-btn {
       background: linear-gradient(135deg, #4cafef, #007bff);
       color: white;
@@ -96,389 +167,288 @@
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
       transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
       margin-top: 8px;
     }
+
     .apply-btn:hover {
       background: linear-gradient(135deg, #007bff, #4cafef);
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0, 123, 255, 0.6);
     }
-    .apply-btn:active {
-      transform: scale(0.95);
-      box-shadow: 0 4px 10px rgba(0, 123, 255, 0.4);
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 10px;
     }
-    body {
-    font-family: Arial, sans-serif;
-    background: #f9f9f9;
-    margin: 0;
-    padding: 20px;
-}
-
-.form-container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-h3 {
-    margin-top: 25px;
-}
-
-label {
-    display: block;
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-}
-
-textarea {
-    height: 80px;
-    resize: none;
-}
-
-.image-upload {
-    margin-top: 10px;
-}
-
-.upload-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px dashed #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    cursor: pointer;
-    background: #f5f5f5;
-}
-
-.upload-box img {
-    max-width: 100px;
-    max-height: 100px;
-}
-
-.custom-checkbox {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-weight: normal;
-    margin-top: 10px;
-}
-
-.custom-checkbox input {
-    display: none;
-}
-
-.checkmark {
-    width: 18px;
-    height: 18px;
-    border: 2px solid #666;
-    margin-right: 10px;
-    display: inline-block;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.custom-checkbox input:checked + .checkmark {
-    background-color: #4CAF50;
-    border-color: #4CAF50;
-}
-
-.custom-checkbox input:checked + .checkmark::after {
-    content: "✔";
-    position: absolute;
-    color: white;
-    font-size: 14px;
-    top: -2px;
-    left: 2px;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-button {
-    padding: 10px 20px;
-    border: none;
-    background: #4CAF50;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-button.back {
-    background: #999;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
-
   </style>
 </head>
+
 <body>
+  <div class="wizard">
+    <!-- Step Indicator -->
+    <div class="step-indicator">
+      <div class="step active">Theme</div>
+      <div class="step">Product Type</div>
+      <div class="step">Basic Details</div>
+      <div class="step">Pricing</div>
+    </div>
 
-<div class="wizard">
-  <div class="wizard-step active" id="step1">
-    <h2 class="mb-4">Apply a Theme</h2>
-    <div class="row g-3">
-      <div class="col-md-4">
-        <div class="theme-card p-2" data-theme="bag">
-          <img src="C:/Users/nachi/Downloads/bag theme.webp" alt="Theme 1"><br><br>
-          <b class="mt-2">Bag Theme</b> <br><br>
-          <button class="apply-btn">Apply</button>
+    <!-- Step 1: Theme Selection -->
+    <div class="wizard-step active" id="step1">
+      <h2 class="mb-4">Apply a Theme</h2>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="theme-card p-2" data-theme="bag"><br><br>
+            <img src="C:\Users\nachi\Downloads\bag theme.webp" alt="Theme 1"><br><br>
+            <b class="mt-2">Bag Theme</b><br><br>
+            <button class="apply-btn">Apply</button>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="theme-card p-2" data-theme="flex"><br><br>
+            <img src="C:\Users\nachi\Downloads\flex teme.jpeg" alt="Theme 2"><br><br>
+            <b class="mt-2">Flex Theme</b><br><br>
+            <button class="apply-btn">Apply</button>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="theme-card p-2" data-theme="chic"><br><br>
+            <img src="C:\Users\nachi\Downloads\chic theme.webp" alt="Theme 3"><br><br>
+            <b class="mt-2">Chic Theme</b><br><br>
+            <button class="apply-btn">Apply</button>
+          </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="theme-card p-2" data-theme="flex">
-          <img src="C:/Users/nachi/Downloads/flex teme.jpeg" alt="Theme 2"><br><br>
-          <b class="mt-2">Flex Theme</b><br><br>
-          <button class="apply-btn">Apply</button>
+      <div class="text-end mt-4">
+        <button class="btn btn-primary next-btn">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Product Type -->
+    <div class="wizard-step" id="step2">
+      <h4 class="mb-4">Enter Product Details</h4>
+      <form>
+        <div class="mb-3">
+          <label class="form-label">Add a Product Type</label>
+          <input type="text" class="form-control" placeholder="eg - Clothing">
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="theme-card p-2" data-theme="chic">
-          <img src="C:/Users/nachi/Downloads/chic theme.webp" alt="Theme 3"><br><br>
-          <b class="mt-2">Chic Theme</b> <br><br>
-          <button class="apply-btn">Apply</button>
+        <div class="mb-3">
+          <label class="form-label">Add a Category (optional)</label>
+          <input type="text" class="form-control" placeholder="eg - T-shirts">
         </div>
+        <div class="mb-3">
+          <label class="form-label">Add a Sub-Category (optional)</label>
+          <input type="text" class="form-control" placeholder="eg - Pants">
+        </div>
+      </form>
+      <div class="d-flex justify-content-between mt-4">
+        <button class="btn btn-secondary prev-btn">Back</button>
+        <button class="btn btn-primary next-btn">Next</button>
       </div>
     </div>
-    <div class="text-end mt-4">
-      <button class="btn btn-primary next-btn">Next</button>
-    </div>
-  </div>
 
-  <div class="wizard-step" id="step2">
-    <h4 class="mb-4">Enter Product Details</h4>
-    <form>
+    <!-- Step 3: Basic Details -->
+    <div class="wizard-step" id="step3">
+      <h2>Basic Product Details</h2>
       <div class="mb-3">
-        <label class="form-label">Add a Product Type</label>
-        <input type="text" class="form-control" placeholder="eg - Clothing">
+        <label for="productName">Product name</label>
+        <input type="text" id="productName" placeholder="eg - anatomy book">
       </div>
       <div class="mb-3">
-        <label class="form-label">Add a Category (optional)</label>
-        <input type="text" class="form-control" placeholder="eg - T-shirts">
+        <label for="productDescription">Product Description</label>
+        <textarea id="productDescription" placeholder="Enter product description"></textarea>
       </div>
       <div class="mb-3">
-        <label class="form-label">Add a Sub-Category (optional)</label>
-        <input type="text" class="form-control" placeholder="eg - Pants">
-      </div>
-    </form>
-    <div class="d-flex justify-content-between mt-4">
-      <button class="btn btn-secondary prev-btn">Back</button>
-      <button class="btn btn-primary next-btn">Next</button>
-    </div>
-    
-  </div>
-
-
-  
-
-  
-  <div class="wizard-step" id="step3">
-
-      <h2>Lets add your first product</h2>
-  
-      <h3>Basic Details</h3>
-      
-      <label>Product name</label>
-      <input type="text" placeholder="eg - anatomy book">
-  
-      <label>Product Description</label>
-      <textarea placeholder="Input text"></textarea>
-  
-      <label>Add Image(s)</label>
-      <div class="image-upload">
-          <input type="file" id="productImage" accept="image/*" hidden>
-          <label for="productImage" class="upload-box">
-              <span>📷 Upload Image</span>
-              <img id="previewImage" src="" alt="" style="display:none;">
+        <label>Add Image(s)</label>
+        <div class="image-upload">
+          <input type="file" id="imageInput" hidden>
+          <label for="imageInput" class="upload-box">
+            <span>📷</span>
+            <p>Click to upload</p>
           </label>
+        </div>
       </div>
-  
-      <label class="custom-checkbox">
+      <div class="sku-section mb-3">
+        <label class="custom-checkbox">
           <input type="checkbox" id="skuCheck">
           <span class="checkmark"></span>
-          this product has an SKU code
-      </label>
-      <input type="text" placeholder="eg - PROD0001">
-  
-      <label class="custom-checkbox">
+          This product has an SKU code
+        </label>
+        <input type="text" placeholder="eg - PROD0001">
+      </div>
+      <div class="d-flex justify-content-between mt-4">
+        <button class="btn btn-secondary prev-btn">Back</button>
+        <button class="btn btn-primary next-btn">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Pricing -->
+    <div class="wizard-step" id="step4">
+      <!-- Basic Details Section -->
+      <h2>Let's add your first product</h2>
+      <h3>Basic Details</h3>
+      
+      <div class="mb-3">
+        <label>Product name</label>
+        <input type="text" placeholder="eg - anatomy book">
+      </div>
+    
+      <div class="mb-3">
+        <label>Product Description</label>
+        <textarea placeholder="Input text"></textarea>
+      </div>
+    
+      <div class="mb-3">
+        <label>Add Image(s)</label>
+        <div class="image-upload">
+          <input type="file" id="productImage" accept="image/*" hidden>
+          <label for="productImage" class="upload-box">
+            <span>📷 Upload Image</span>
+            <img id="previewImage" src="" alt="" style="display:none;">
+          </label>
+        </div>
+      </div>
+    
+      <div class="mb-3">
+        <label class="custom-checkbox">
+          <input type="checkbox" id="skuCheck">
+          <span class="checkmark"></span>
+          This product has an SKU code
+        </label>
+        <input type="text" placeholder="eg - PROD0001" class="mt-2">
+      </div>
+    
+      <div class="mb-4">
+        <label class="custom-checkbox">
           <input type="checkbox" id="hsnCheck">
           <span class="checkmark"></span>
-          this product has an HSN/SAC code
-      </label>
-  
-      <hr>
-  
+          This product has an HSN/SAC code
+        </label>
+      </div>
+    
+      <!-- Pricing Details Section -->
       <h3>Pricing Details</h3>
-  
       <label class="custom-checkbox">
-          <input type="checkbox" id="gstCheck">
-          <span class="checkmark"></span>
-          price inclusive of GST
+        <input type="checkbox" id="gstCheck">
+        <span class="checkmark"></span>
+        Price inclusive of GST
       </label>
-  
-      <div class="grid">
-          <input type="number" placeholder="Net price">
-          <input type="number" placeholder="List price">
-          <input type="number" placeholder="Discount percentage">
-          <input type="number" placeholder="GST rate">
-          <input type="number" placeholder="Shipping charges (if any)">
-          <input type="number" placeholder="Stock level">
       
-  </div>
-    <div class="d-flex justify-content-between mt-4">
-      <button class="btn btn-secondary prev-btn">Back</button>
-      <button class="btn btn-success">Finish</button>
+      <div class="grid">
+        <input type="number" placeholder="Net price">
+        <input type="number" placeholder="List price">
+        <input type="number" placeholder="Discount percentage">
+        <input type="number" placeholder="GST rate">
+        <input type="number" placeholder="Shipping charges (if any)">
+        <input type="number" placeholder="Stock level">
+      </div>
+    
+      <div class="d-flex justify-content-between mt-4">
+        <button class="btn btn-secondary prev-btn">Back</button>
+        <button class="btn btn-success">Finish</button>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-$(document).ready(function(){
-  let currentStep = 1;
+  <!-- JavaScript -->
+  <script>
+    $(document).ready(function(){
+      let currentStep = 1;
 
-  function showStep(step) {
-    $(".wizard-step").removeClass("active");
-    $("#step" + step).addClass("active");
-    $(".step-indicator .step").removeClass("active");
-    $(".step-indicator .step").eq(step-1).addClass("active");
-  }
+      function showStep(step) {
+        $(".wizard-step").removeClass("active");
+        $("#step" + step).addClass("active");
+        $(".step-indicator .step").removeClass("active");
+        $(".step-indicator .step").eq(step-1).addClass("active");
+        updateButtons(step);
+      }
 
-  $(".next-btn").click(function(){
-    if(currentStep < 3){
-      currentStep++;
-      showStep(currentStep);
-    }
-  });
-
-  $(".prev-btn").click(function(){
-    if(currentStep > 1){
-      currentStep--;
-      showStep(currentStep);
-    }
-  });
-
-  
-  $(".apply-btn").click(function(){
-    let themeCard = $(this).closest(".theme-card");
-    $(".theme-card").removeClass("active");
-    themeCard.addClass("active");
-
-    let themeType = themeCard.data("theme");
-
-    if(themeType === "bag"){
-      $("body").css({"background":"#f5e7d3", "color":"#4b3832"});
-      $(".wizard").css({"background":"#fff7ec", "color":"#4b3832"});
-    }
-    else if(themeType === "flex"){
-      $("body").css({"background":"#d3f5f1", "color":"#03403f"});
-      $(".wizard").css({"background":"#ecfffc", "color":"#03403f"});
-    }
-    else if(themeType === "chic"){
-      $("body").css({"background":"#f3d3f5", "color":"#3d003d"});
-      $(".wizard").css({"background":"#fff0ff", "color":"#3d003d"});
-    }
-  });
-});
-
-$(".apply-btn").click(function(){
-  let themeCard = $(this).closest(".theme-card");
-  $(".theme-card").removeClass("active");
-  themeCard.addClass("active");
-
- 
-  $(".apply-btn").html("Apply").css({
-    background: "linear-gradient(135deg, #4cafef, #007bff)",
-    boxShadow: "0 4px 15px rgba(0, 123, 255, 0.4)"
-  });
-
- 
-  $(this).html("&#10004;").css({
-    background: "linear-gradient(135deg, #28a745, #218838)",
-    boxShadow: "0 4px 15px rgba(40, 167, 69, 0.4)"
-  });
-
-  let themeType = themeCard.data("theme");
-
-  if(themeType === "bag"){
-    $("body").css({"background":"#f5e7d3", "color":"#4b3832"});
-    $(".wizard").css({"background":"#fff7ec", "color":"#4b3832"});
-  }
-  else if(themeType === "flex"){
-    $("body").css({"background":"#d3f5f1", "color":"#03403f"});
-    $(".wizard").css({"background":"#ecfffc", "color":"#03403f"});
-  }
-  else if(themeType === "chic"){
-    $("body").css({"background":"#f3d3f5", "color":"#3d003d"});
-    $(".wizard").css({"background":"#fff0ff", "color":"#3d003d"});
-  }
-});
-
-document.getElementById("productImage").addEventListener("change", function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const img = document.getElementById("previewImage");
-            img.src = e.target.result;
-            img.style.display = "block";
+      function updateButtons(step) {
+        $(".prev-btn").toggle(step > 1);
+        if (step === 4) {
+          $(".next-btn").hide();
+          $(".btn-success").show();
+        } else {
+          $(".next-btn").show();
+          $(".btn-success").hide();
         }
-        reader.readAsDataURL(file);
-    }
-});
-const step1 = document.getElementById("step1");
-    const step2 = document.getElementById("step2");
-    const nextBtn = document.getElementById("nextBtn");
-    const backBtn = document.getElementById("backBtn");
+      }
 
-    nextBtn.addEventListener("click", () => {
-        nextBtn.innerHTML = "&#10003;"; // checkmark
-        nextBtn.classList.add("checkmark");
-        setTimeout(() => {
-            step1.classList.remove("active");
-            step2.classList.add("active");
-        }, 500); // wait before moving
+      // Navigation
+      $(".next-btn").click(function(){
+        if(currentStep < 4){
+          currentStep++;
+          showStep(currentStep);
+        }
+      });
+
+      $(".prev-btn").click(function(){
+        if(currentStep > 1){
+          currentStep--;
+          showStep(currentStep);
+        }
+      });
+
+      // Theme Selection
+      $(".apply-btn").click(function(){
+        let themeCard = $(this).closest(".theme-card");
+        $(".theme-card").removeClass("active");
+        themeCard.addClass("active");
+
+        $(".apply-btn").html("Apply").css({
+          background: "linear-gradient(135deg, #4cafef, #007bff)",
+          boxShadow: "0 4px 15px rgba(0, 123, 255, 0.4)"
+        });
+
+        $(this).html("&#10004;").css({
+          background: "linear-gradient(135deg, #28a745, #218838)",
+          boxShadow: "0 4px 15px rgba(40, 167, 69, 0.4)"
+        });
+
+        applyTheme(themeCard.data("theme"));
+      });
+
+      function applyTheme(themeType) {
+        const themes = {
+          bag: {
+            body: { background: "#f5e7d3", color: "#4b3832" },
+            wizard: { background: "#fff7ec", color: "#4b3832" }
+          },
+          flex: {
+            body: { background: "#d3f5f1", color: "#03403f" },
+            wizard: { background: "#ecfffc", color: "#03403f" }
+          },
+          chic: {
+            body: { background: "#f3d3f5", color: "#3d003d" },
+            wizard: { background: "#fff0ff", color: "#3d003d" }
+          }
+        };
+
+        if (themes[themeType]) {
+          $("body").css(themes[themeType].body);
+          $(".wizard").css(themes[themeType].wizard);
+        }
+      }
+
+      // Image Upload Preview
+      $("#productImage, #imageInput").change(function(event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            const img = $(event.target).siblings('label').find('img');
+            img.attr('src', e.target.result).show();
+          }
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Initialize
+      showStep(1);
     });
-
-    backBtn.addEventListener("click", () => {
-        step2.classList.remove("active");
-        step1.classList.add("active");
-        nextBtn.innerHTML = "Next";
-        nextBtn.classList.remove("checkmark");
-    });
-</script>
-
+  </script>
 </body>
 </html>
